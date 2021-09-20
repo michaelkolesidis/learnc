@@ -901,43 +901,374 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Coffee Venting Machine
+ * Takes only €5 banknotes
+ * Coffee price: €0.70
+ * Takes number of coffees as input and calculates change 
+ * and whether €5 are enough for the purchase.
+ */
 
+#include <stdio.h>
+
+int main()
+{
+    const int price = 70;
+    const int available = 500;
+    int coffees, total, change, total_change;
+    int c10, c20, c50, c1, c2 = 0;
+
+    printf("How many coffees would you like to order?\n");
+    scanf("%d", &coffees);
+
+    while (coffees < 0)
+    {
+        printf("Please enter a valid number:\n");
+        scanf("%d", &coffees);
+    }
+
+    total = price * coffees;
+    if (total > available)
+    {
+        printf("€5 are not enough for %d coffees.\n", coffees);
+        return 0;
+    }
+
+    change = available - total;
+    total_change = change;
+
+    while (change > 0)
+    {
+        if (change >= 400)
+        {
+            c2 += 2;
+            change -= 400;
+        }
+        if (change >= 200 && change < 400)
+        {
+            c2 += 1;
+            change -= 200;
+        }
+        if (change >= 100 && change < 200)
+        {
+            c1 += 1;
+            change -= 100;
+        }
+        if (change >= 50 && change < 100)
+        {
+            c50 += 1;
+            change -= 50;
+        }
+        if (change >= 20 && change < 50)
+        {
+            c20 += 1;
+            change -= 20;
+        }
+        if (change >= 10 && change < 20)
+        {
+            c10 += 1;
+            change -= 10;
+        }
+    }
+    
+    printf("\n Price : %d", total / 100);
+    printf("\nChange :\n");
+    if (c2) printf("   €2 coins : %d\n", c2);
+    if (c1) printf("   €1 coins : %d\n", c1);
+    if (c50) printf("€0.50 coins : %d\n", c50);
+    if (c20) printf("€0.20 coins : %d\n", c20);
+    if (c10) printf("€0.10 coins : %d\n", c10);
+    printf("=======================\n");
+    printf("      Total : %d\n\n", total_change / 100);
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Coffee Venting Machine */
+/* Solution 2 */
 
+#include <stdio.h>
+
+int main()
+{
+    const int price = 70;
+    const int available = 500;
+    int coffees, change, total_change;
+    int c10, c20, c50, c1, c2 = 0;
+
+    printf("How many coffees would you like to order?\n");
+    scanf("%d", &coffees);
+
+    while (coffees < 0)
+    {
+        printf("Please enter a valid number:\n");
+        scanf("%d", &coffees);
+    }
+
+    change = available - price * coffees;
+    total_change = change;
+
+    if (change < 0)
+    {
+        printf("€5 are not enough for %d coffees.\n", coffees);
+        return 1;
+    }
+
+    c2 = change /200;
+    change = change % 200;
+
+    c1 = change /100;
+    change = change % 100;
+
+    c50 = change /50;
+    change = change % 50;
+
+    c20 = change /20;
+    change = change % 20;
+
+    c10 = change /10;
+    change = change % 10;
+
+    printf("\nChange :\n");
+    if (c2)
+        printf("   €2 coins : %d\n", c2);
+    if (c1)
+        printf("   €1 coins : %d\n", c1);
+    if (c50)
+        printf("€0.50 coins : %d\n", c50);
+    if (c20)
+        printf("€0.20 coins : %d\n", c20);
+    if (c10)
+        printf("€0.10 coins : %d\n", c10);
+    printf("=======================\n");
+    printf("      Total : %f\n\n", total_change / 100.0);
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* BMI Calculator */
 
+#include <stdio.h>
+
+int main()
+{
+    float weight, height, bmi;
+
+    printf("Please enter your weight:\n");
+    scanf("%f", &weight);
+
+    printf("Please enter your height:\n");
+    scanf("%f", &height);
+
+    bmi = weight / (height * height);
+
+    if (bmi < 18.5)
+    {
+        printf("BMI: %f\nUnderwight\n", bmi);
+    }
+    else if (bmi >= 18.5 && bmi < 25)
+    {
+        printf("BMI: %f\nNormal Range\n", bmi);
+    }
+    else if (bmi >= 25 && bmi < 30)
+    {
+        printf("BMI: %f\nOverweight\n", bmi);
+    }
+    else
+    {
+        printf("BMI: %f\nObese\n", bmi);
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Quadratic Formula */
 
+#include <math.h>
+#include <stdio.h>
+
+int main()
+{
+    float a, b, c, discriminant, x1, x2;
+    printf("Enter a, b, c:\n");
+    scanf("%f %f %f", &a, &b, &c);
+
+    discriminant = b * b - 4 * a * c;
+
+    if (discriminant < 0)
+    {
+        printf("There aren't real solutions to the quadratic equation.\n");
+    }
+    else if (discriminant == 0)
+    {
+        x1 = x2 = -b / (2 * a);
+        printf("x1, x2 = %f\n", x1);
+    }
+    else
+    {
+        x1 = (-b + sqrt(discriminant)) / (2 * a);
+        x2 = (-b - sqrt(discriminant)) / (2 * a);
+        printf("x1 = %f\n", x1);
+        printf("x2 = %f\n", x2);
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Tiered Pricing */
 
+#include <stdio.h>
+
+int main()
+{
+    int sms;
+    float price;
+
+    printf("How many SMS did you send:\n");
+    scanf("%d", &sms);
+
+    if (sms <= 10)
+        price = sms * 2;
+    else if (sms <= 60)
+        price = 10 * 2 + (sms - 10) * 1.5;
+    else if (sms <= 160)
+        price = 10 * 2 + 50 * 1.5 + (sms - 60) * 1.2;
+    else
+        price = 10 * 2 + 50 * 1.5 + 100 * 1.2 + (sms - 160) * 1;
+
+    printf("SMS sent: %d\n", sms);
+    printf("  Price : %f\n", price / 100);
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Fuel Consumption */
 
+#include <stdio.h>
+
+int main()
+{
+    float liters, miles, consumption;
+
+    printf("Distance in miles:\n");
+    scanf("%f", &miles);
+
+    printf("Fuel used in liters:\n");
+    scanf("%f", &liters);
+
+    consumption = liters / miles;
+
+    if (consumption <= 0.9)
+        printf("Very Low Consumption");
+    else if (consumption <= 1.2)
+        printf("Low Consumption");
+    else if (consumption <= 1.8)
+        printf("Normal Consumption");
+    else
+        printf("High Consumption");
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Multiplication Table */
 
+#include <stdio.h>
+
+int main()
+{
+    int i, j;
+    for (i = 1; i <= 10; i++)
+    {
+        for (j = 1; j <= 10; j++)
+        {
+            printf("%d x %d = %d\n", i, j, i * j);
+        }
+        printf("-------------\n");
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Reverse integer : Takes an integer as input and prints its digits
+ * in reverse order */
 
+#include <stdio.h>
+
+int main()
+{
+    int num, quo, rem;
+    printf("Enter a number:\n");
+    scanf("%d", &num);
+    do
+    {
+       rem = num % 10;
+       quo = num /10;
+       printf("%d", rem);
+       num = quo;
+    } while (quo != 0);
+    
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Counts typed Latin characters */
 
+#include <stdio.h>
+
+int main()
+{
+    char ch;
+    int lat = 0;
+    while (ch != 27)
+    {
+        ch = getchar();
+        if (ch >= 65 && ch <= 90 || ch >= 97 && ch <= 122)
+        {
+            lat += 1;
+        }
+    }
+    printf("You typed %d Latin letters\n", lat);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Count characters typed between two asterisks */
 
+#include <stdio.h>
+
+int main()
+{
+    char ch;
+    int asterisk = 0;
+    int total = 0;
+
+    do
+    {
+        scanf("%c", &ch);
+        if (ch == '*')
+            asterisk += 1;
+        if (asterisk > 0 && ch != '*' && ch!= 10)
+            total += 1;
+        
+    } while (asterisk < 2);
+    printf("%d characters typed between the two asterisks\n", total);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
