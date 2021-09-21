@@ -528,14 +528,18 @@ int main()
 /* ---------------------------------------------------------------- */
 
 /*
-A digital building alarm system returns an 1-byte integer as a value, whose bits transmit the following data:
-Bits 7, 6, 5 and 4 specify the checkpoint (16 possible combinations from 0-15
-Bits 3 and 2 the type of emergency (0-None, 1-Fire, 2-Break-in, 3-Smoke)
-Bit 1 show the system state (1-Working, 0-Failure)
-Bit 0 is not used.
-
-Write a program that takes the alarm system output as input and displays the checkpoint and the emergency type. In case of a system failure, the output should be "System Failure".
-*/
+ * A digital building alarm system returns an 1-byte integer as a value, 
+ * whose bits transmit the following data:
+ *
+ * Bits 7, 6, 5 and 4 specify the checkpoint (16 possible combinations from 0-15
+ * Bits 3 and 2 the type of emergency (0-None, 1-Fire, 2-Break-in, 3-Smoke)
+ * Bit 1 show the system state (1-Working, 0-Failure)
+ * Bit 0 is not used.
+ *
+ * Write a program that takes the alarm system output as input and displays 
+ * the checkpoint and the emergency type. In case of a system failure, the 
+ * output should be "System Failure".
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -1480,7 +1484,10 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
-/* Euclidean Algorithm for Greatest Common Divisor */
+/* 
+ * Euclidean Algorithm computing the greatest commin divisor of two integers 
+ * Alternative solution
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
