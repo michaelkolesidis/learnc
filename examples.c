@@ -1272,35 +1272,254 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Sum of fraction 1/1 + 1/2 + ... + 1/limit */
 
+#include <stdio.h>
 
-/* ---------------------------------------------------------------- */
+int main()
+{
+    int limit = 100;
+    double sum = 0;
+    for (int i = 1; i <= limit; i++)
+    {
+        sum += (1.0 / i);
+    }
+    printf("%lf", sum);
 
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Decimal to Binary Converter */
 
+#include <stdio.h>
+
+int main()
+{
+    int num, bin, shift;
+    printf("Enter number in decimal:\n");
+    scanf("%d", &num);
+    printf("%d in binary form is:\n", num);
+
+    for (shift = 31; shift >= 0; shift--)
+    {
+        bin = num >> shift;
+
+        if (bin & 1)
+            printf("1");
+        else
+            printf("0");
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Print numbers 1 to 100 in a matrix */
 
+#include <stdio.h>
+
+int main()
+{
+    int i;
+    for (i = 1; i <= 100; i++)
+    {
+        if (i < 10)
+            printf("0%d ", i);
+        else
+            printf("%d ", i);
+        if (i % 10 == 0)
+            putchar('\n');
+    }
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Calculates the sum of the digits of a given integer */
+
+#include <stdio.h>
+
+int main()
+{
+    int num, r, q;
+    int sum = 0;
+    printf("Enter a number:\n");
+    scanf("%d", &num);
+
+    do
+    {
+        q = num / 10;
+        r = num % 10;
+        sum += r;
+        num = q;
+    } while (q != 0);
+
+    printf("Sum of digits: %d", sum);
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Student marks average, maximum and second biggest mark */
+
+#include <stdio.h>
+
+int main()
+{
+    int i, students;
+    float mark, sum, max, max2, average;
+    sum = 0;
+    students = 10;
+
+    for (i = 1; i <= students; i++)
+    {
+        printf("Enter mark of student %d : \n", i);
+        scanf("%f", &mark);
+        sum += mark;
+
+        if (i == 1)
+        {
+            max = mark;
+        }
+        else if (i == 2)
+        {
+            max2 = mark;
+        }
+        else
+        {
+            if (mark > max)
+            {
+                max2 = max;
+                max = mark;
+            }
+            else if (mark > max2)
+            {
+                max2 = mark;
+            }
+        }
+    }
+
+    average = sum / students;
+
+    printf("            Average : %.2f\n", average);
+    printf("       Biggest mark : %.2f\n", max);
+    printf("Second biggest mark : %.2f\n", max2);
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Calculate f(x)=x^4-5x^2+3 for x = 0 to x = 1 with step 0.05 */
+
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <math.h>
+
+int main()
+{
+    int i;
+    double x, fx;
+
+    for (x = 0; x <= 1.001; x = x + 0.05)
+    {
+        fx = pow(x, 4) - 5 * pow(x, 2) + 3;
+        printf("x= %lf  f(x)= %lf\n", x, fx);
+    }
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* ax^2-bx+3=0 Calculate all real solutions for combinations of a, b
+ * in the range [-50, 50], unless they are both 0.
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int a, b;
+    double x1, x2, d;
+
+    for (a = -50; a <= 50; a++)
+    {
+        for (b = -50; b <= 50; b++)
+        {
+            if (a == 0 || b == 0)
+                continue;
+
+            d = pow(b, 2) - 4 * a * 3;
+            if (d > 0)
+            {
+                x1 = (-b + sqrt(d)) / (2 * a);
+                x2 = (-b - sqrt(d)) / (2 * a);
+                printf("a=%d b=%d  x1=%lf x2=%lf\n", a, b, x1, x2);
+            }
+            else if (d == 0)
+            {
+                x1 = -b / (2 * a);
+                printf("a=%d b=%d  x=%lf\n", a, b, x1);
+            }
+            else
+            {
+                printf("a=%d b=%d there are no real solutions\n", a, b);
+            }
+        }
+    }
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Euclidean Algorithm for Greatest Common Divisor */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int m, n, temp, r, gcd;
+    scanf("%d %d", &m, &n);
+
+    if (n > m)
+    {
+        temp = m;
+        m = n;
+        n = temp;
+    }
+
+    if (n == 0)
+    {
+        gcd = m;
+    }
+
+    else
+    {
+        do
+        {
+            r = m % n;
+
+            if (r != 0)
+            {
+                m = n;
+                n = r;
+            }
+        } while (r != 0);
+        gcd = n;
+    }
+
+    printf("greatest common divisor --> %d", gcd);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
