@@ -1530,39 +1530,365 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Print all integers in the given range */
+
+#include <stdio.h>
+
+void numbers(int from, int to)
+{
+    int i, temp;
+
+    if (from > to)
+    {
+        temp = to;
+        to = from;
+        from = temp;
+    }
+
+    for (i = from; i <= to; i++)
+    {
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    int first, last;
+    printf("Choose range: first number to last number\n");
+    scanf("%d %d", &first, &last);
+    printf("Show numbers:\n");
+    numbers(first, last);
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* John Wallis formula for pi approximation */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+long double wallis(int last)
+{
+    long double half_pi;
+    int i;
+    half_pi = 1;
+
+    for (i = 1; i <= last - 2; i += 2)
+    {
+        half_pi *= pow((i+1), 2) / (i * (i+2));
+    }
+
+        return half_pi;
+}
+
+int main()
+{
+    int x;
+    scanf("%d", &x);
+    printf(" pi = %Lf", 2 * wallis(x));
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Leap years between two given years */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int leap(int year)
+{
+    if (year % 4 == 0)
+    {
+        if (year % 100 == 0)
+        {
+            if (year % 400 == 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return 1;
+        }
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+int main()
+{
+    int start_year, end_year, this_year;
+    scanf("%d %d", &start_year, &end_year);
+
+    for (this_year = start_year; this_year <= end_year; this_year++)
+    {
+        if (leap(this_year) == 1)
+        {
+            printf("%d ", this_year);
+        }
+    }
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* BMI using functions */
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int calculate(float height, float weight)
+{
+    float bmi_;
+    bmi_ = weight / (height * height);
+    return bmi_;
+}
+
+void results(float bmi)
+{
+    if (bmi < 18.5)
+    {
+        printf("BMI: %f\nUnderwight\n", bmi);
+    }
+    else if (bmi >= 18.5 && bmi < 25)
+    {
+        printf("BMI: %f\nNormal Range\n", bmi);
+    }
+    else if (bmi >= 25 && bmi < 30)
+    {
+        printf("BMI: %f\nOverweight\n", bmi);
+    }
+    else
+    {
+        printf("BMI: %f\nObese\n", bmi);
+    }
+    printf("\n");
+}
+
+int main()
+{
+    float h, w;
+    do
+    {
+        printf("Enter height:\n");
+        scanf("%f", &h);
+        printf("Enter weight:\n");
+        scanf("%f", &w);
+        if (h == 0 || w == 0) break;
+        results(calculate(h, w));
+    } while (1);
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* Calculate f(x)=x^4-10x^2+2 for x = 0 to x = 1 with step 0.05 using function */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+double calculate(double x_)
+{
+    double fx_;
+    fx_ = pow(x_, 4) - 10 * pow(x_, 2) + 2;
+
+    return fx_;
+}
+
+int main()
+{
+    int i;
+    double x;
+
+    for (x = 0; x <= 1.001; x = x + 0.05)
+    {
+        calculate(x);
+        printf("x= %.3lf  f(x)= %.3lf\n", x, calculate(x));
+    }
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* VAT calculator with functions 
+ * Each product belongs to a VAT category as following
+ *
+ * Category  VAT%
+ *      1   0.00
+ *      2   0.06
+ *      3   0.13
+ *      4   0.19
+ */
+
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+float calculate_vat(int quantity_, float price_, int cat_)
+{
+    float vat;
+    switch (cat_)
+    {
+    case 1:
+        vat = 0;
+        break;
+    case 2:
+        vat = quantity_ * price_ * 0.06;
+        break;
+    case 3:
+        vat = quantity_ * price_ * 0.13;
+        break;
+    case 4:
+        vat = quantity_ * price_ * 0.19;
+        break;
+    }
+    return vat;
+}
+
+int main()
+{
+    int i, quantity, cat;
+    float price, total_cost = 0, total_vat = 0;
+    for (i = 1; i <= 10; i++)
+    {
+        printf("Product %d\n", i);
+        printf("Quantity:\n");
+        scanf("%d", &quantity);
+        printf("Price:\n");
+        scanf("%f", &price);
+        printf("Category:\n");
+        scanf("%d", &cat);
+
+        total_cost += quantity * price;
+        total_vat += calculate_vat(quantity, price, cat);
+    }
+
+    printf("Price without VAT: %f\n", total_cost - total_vat);
+    printf("              VAT: %f\n", total_vat);
+    printf("==============================\n");
+    printf("            Total: %f", total_cost);
+
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* 100 First Primes */
+
+#include <stdio.h>
+
+int prime()
+{
+    static int num = 1;
+    int i, found = 1;
+    while (found)
+    {
+        found = 0;
+        num = num + 1;
+        for (i = 2; i <= num / 2; i++)
+        {
+            if (num % i == 0)
+                found = 1;
+        }
+    }
+    return num;
+}
+
+int main()
+{
+    int i;
+    for (int i = 0; i < 100; i++)
+    {
+        printf("%d ", prime());
+    }
+    return 0;
+}
+
+/* ---------------------------------------------------------------- */
+
+/* 100 First Primes using a global variable */
+/* THE USE OF GLOBAL VARIABLES IS NOT ADVISABLE */
+
+#include <stdio.h>
+
+int num = 1;
+
+int prime()
+{
+    int i, found = 1;
+    while (found)
+    {
+        found = 0;
+        num = num + 1;
+        for (i = 2; i <= num / 2; i++)
+        {
+            if (num % i == 0)
+                found = 1;
+        }
+    }
+    return num;
+}
+
+int main()
+{
+    int i;
+    for (int i = 0; i < 100; i++)
+    {
+        printf("%d ", prime());
+    }
+    return 0;
+}
 
 
 /* ---------------------------------------------------------------- */
 
+/* Sum and product of two numbers using global variables */
+/* THE USE OF GLOBAL VARIABLES IS NOT ADVISABLE */
 
+#include <stdio.h>
 
-/* ---------------------------------------------------------------- */
+int x, y, sum, pro;
 
+int add()
+{
+    return x + y;
+}
 
+int gin()
+{
+    return x * y;
+}
 
-/* ---------------------------------------------------------------- */
+void out()
+{
+    printf("Sum = %d Product = %d \n", sum, pro);
+}
 
+int main()
+{
+    scanf("%d %d", &x, &y);
+    sum = add();
+    pro = gin();
+    out();
 
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
-
-/* ---------------------------------------------------------------- */
-
-
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
