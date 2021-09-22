@@ -1892,15 +1892,113 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Factorial */
 
+#include <stdio.h>
+
+unsigned long long int calc_fact(int num)
+{
+    int i;
+    unsigned long long int factorial = 1;
+
+    for (i = 1; i <= num; i++)
+    {
+        factorial *= i;
+    }
+    return factorial;
+}
+
+int main()
+{
+    int num;
+    scanf("%d", &num);
+    printf("!%d = %llu", num, calc_fact(num));
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Live number counter */
 
+#include <stdio.h>
+
+int main()
+{
+    int delay = 1000000;
+
+    for (int i = 0; i < 100; i++)
+    {
+        printf("\rNumber : %d", i);
+        for (int j = 0; j < delay; j++)
+        fflush(stdout);
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Creates a custom parallelogram of varying sizes according to user input 
+ * It is created using a character of choice and be filled or empty.
+ */
 
+#include <stdio.h>
+
+int draw(char ch, int w, int h, int fill)
+{
+    int i, j;
+    printf("\n\n");
+
+    /* print top side */
+    for (i = 1; i <= w; i++)
+        printf("%c", ch);
+    printf("\n");
+
+    /* print middle part */
+    for (i = 1; i <= h - 2; i++)
+    {
+        printf("%c", ch);
+        for (j = 1; j <= w - 2; j++)
+        {
+            if (fill == 0)
+                printf(" ");
+            else if (fill == 1)
+                printf("%c", ch);
+        }
+        printf("%c", ch);
+        printf("\n");
+    }
+
+    /* print bottom side */
+    for (i = 1; i <= w; i++)
+    {
+        printf("%c", ch);
+    }
+    printf("\n\n\n");
+    return 0;
+}
+
+int main()
+{
+    char ch;
+    int w, h, fill;
+
+    printf("Character: ");
+    scanf("%c", &ch);
+
+    printf("Width: ");
+    scanf("%d", &w);
+
+    printf("Height: ");
+    scanf("%d", &h);
+
+    printf("Fill (n=0 y=1): ");
+    scanf("%d", &fill);
+
+    draw(ch, w, h, fill);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
