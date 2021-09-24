@@ -2002,7 +2002,7 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
-/* Print string with pointer */
+/* Print string using a pointer */
 
 #include <stdio.h>
 
@@ -2015,7 +2015,7 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
-/* Length of string */
+/* Length of string using a pointer */
 
 #include <stdio.h>
 
@@ -2041,23 +2041,27 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
-/* Count occurences of a character in a string */
+/* Count occurences of a character in a string using a pointer */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 int main()
 {
-    char *ptr;
-    int c=0;
-    ptr = "AUSTRALIA";
-    
-    while(*ptr != '\0')
+    char *p, ch;
+    ch = getchar();
+    int ctr = 0;
+    p = "What a great day to be alive!";
+
+    while (*p != '\0')
     {
-        if (*ptr == 'A') c++;
-        ptr++;
+        if (*p == ch)
+            ctr++;
+        p++;
     }
-    printf("The word had %d A's", c);
+
+    printf("\'%c\' appears %d times.\n", ch, ctr);
+
     return 0;
 }
 
@@ -2092,7 +2096,24 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Sum of given numbers using pointers */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int a, b, c, *p1, *p2, *p3;
+    p1 = &a;
+    p2 = &b;
+    p3 = &c;
+    scanf("%d %d", p1, p2);
+
+    *p3 = *p1 + *p2;
+
+    printf("c = %d", *p3);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
