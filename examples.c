@@ -2002,19 +2002,93 @@ int main()
 
 /* ---------------------------------------------------------------- */
 
+/* Print string with pointer */
 
+#include <stdio.h>
+
+int main()
+{
+    char *b;
+    b = "Hello";
+    printf("%s", b);
+}Ï
 
 /* ---------------------------------------------------------------- */
 
+/* Length of string */
 
+#include <stdio.h>
+
+int length(char *p)
+{
+    int c = 0;
+    while(*p != '\0')
+    {
+        c++;
+        p++;
+    }
+    return c;
+}
+
+int main()
+{
+    char *p;
+    p = "Hello";
+    printf("%d", length(p));
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Count occurences of a character in a string */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    char *ptr;
+    int c=0;
+    ptr = "AUSTRALIA";
+    
+    while(*ptr != '\0')
+    {
+        if (*ptr == 'A') c++;
+        ptr++;
+    }
+    printf("The word had %d A's", c);
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
+/* Reverse string */
 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    char *ptr, *start;
+    int c = 0;
+    ptr = "ACID";
+    start = ptr;
+
+    while (*ptr != '\0')
+    {
+        ptr++;
+    }
+    ptr--;
+
+    while (ptr >= start)
+    {
+        putchar(*ptr);
+        ptr--;
+    }
+
+    return 0;
+}
 
 /* ---------------------------------------------------------------- */
 
